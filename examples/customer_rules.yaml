@@ -1,0 +1,45 @@
+dataset: customers
+
+rules:
+  - type: required_column
+    column: customer_id
+
+  - type: required_column
+    column: email
+
+  - type: required_column
+    column: country
+
+  - type: unique
+    column: customer_id
+
+  - type: not_null
+    column: email
+
+  - type: not_null
+    column: signup_date
+
+  - type: pattern
+    column: email
+    regex: '^[^@\s]+@[^@\s]+\.[^@\s]+$'
+
+  - type: allowed_values
+    column: country
+    values: ["PL", "NL", "DE", "ES"]
+
+  - type: allowed_values
+    column: status
+    values: ["active", "inactive", "pending"]
+
+  - type: numeric_range
+    column: age
+    min: 0
+    max: 120
+
+  - type: numeric_range
+    column: total_spend
+    min: 0
+
+  - type: date_parse
+    column: signup_date
+    format: "%Y-%m-%d"

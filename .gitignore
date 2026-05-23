@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Secrets
+.env
+.env.*
+
+# Data and generated outputs
+data/
+reports/
+*.parquet
+*.csv
+*.xlsx
+
+# Keep small portfolio example files
+!examples/
+!examples/*.csv
+!examples/*.yaml
+!examples/*.yml
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+# Packaging / build artifacts
+*.egg-info/
+build/
+dist/
+

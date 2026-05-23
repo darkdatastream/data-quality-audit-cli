@@ -1,0 +1,8 @@
+customer_id,name,email,country,signup_date,age,total_spend,status
+1,Alice Novak,alice@example.com,PL,2024-01-10,34,120.50,active
+2,Bob Smith,bob.example.com,NL,2024-02-15,41,80.00,active
+3,Carla Ruiz,carla@example.com,ES,,29,45.20,inactive
+3,Carla Ruiz Duplicate,carla.duplicate@example.com,ES,2024-03-01,29,45.20,active
+4,Daniel Lee,,DE,not-a-date,52,300.00,active
+5,Eva Brown,eva@example.com,XX,2024-04-12,27,-10.00,pending
+6,Frank Moore,frank@example.com,NL,2024-05-05,,0.00,unknown
