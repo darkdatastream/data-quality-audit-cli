@@ -17,6 +17,9 @@ dependencies = [
 dev = [
     "pytest>=8.0.0",
 ]
+app = [
+    "streamlit>=1.40.0",
+]
 
 [project.scripts]
 dq-audit = "dq_audit.cli:main"

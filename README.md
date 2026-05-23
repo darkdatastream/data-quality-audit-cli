@@ -4,6 +4,78 @@ CLI tool for auditing messy CSV and Parquet datasets with Polars, YAML validatio
 
 The project shows a reusable Python package structure instead of a one-off notebook. It is designed as a small portfolio project for data quality checks, validation rules, CLI workflows, automated tests, and GitHub Actions.
 
+## System requirements
+
+Recommended environment:
+
+- Linux, macOS, or Windows with WSL
+- Python 3.11 or newer
+- Git
+- Python virtual environment support
+
+On Debian or Ubuntu, install the required system packages with:
+
+```bash
+sudo apt update
+sudo apt install -y python3 python3-venv python3-pip git
+```
+
+If a package ever needs local compilation on your system, install build tools as well:
+
+```bash
+sudo apt install -y build-essential
+```
+
+Native Windows PowerShell/CMD usage is not the primary target for this project. Windows users should use WSL for the same Linux-style commands shown below.
+
+## Quick start from GitHub
+
+Clone the repository:
+
+```bash
+git clone https://github.com/darkdatastream/data-quality-audit-cli.git
+cd data-quality-audit-cli
+```
+
+Create a virtual environment and install the app dependencies:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install -e ".[dev,app]"
+```
+
+Run the business dashboard:
+
+```bash
+.venv/bin/streamlit run app.py
+```
+
+Then open the local URL shown in the terminal, usually:
+
+```text
+http://localhost:8501
+```
+
+To stop the dashboard, press `Ctrl+C` in the terminal.
+
+## CLI usage
+
+Run the included sample audit:
+
+```bash
+.venv/bin/dq-audit run --input examples/dirty_customers.csv --rules examples/customer_rules.yaml --out reports/sample
+```
+
+The generated reports will be written to:
+
+```text
+reports/sample/
+├── summary.md
+├── metrics.json
+└── summary.html
+```
+
 ## What it does
 
 The tool reads a dataset, applies validation rules from a YAML file, and writes audit reports.
@@ -93,6 +165,7 @@ rules:
 
 ```text
 data-quality-audit-cli/
+├── app.py
 ├── dq_audit/
 │   ├── __init__.py
 │   ├── __main__.py
@@ -114,6 +187,28 @@ data-quality-audit-cli/
 ├── pyproject.toml
 └── README.md
 ```
+
+## Business dashboard
+
+The project also includes a Streamlit dashboard for non-technical users.
+
+It provides a browser-based workflow:
+
+- upload a CSV file
+- run the audit
+- review executive metrics
+- view issue charts
+- inspect business impact by rule
+- download HTML, Markdown, and JSON reports
+
+Run the dashboard locally:
+
+```bash
+.venv/bin/python -m pip install -e ".[dev,app]"
+.venv/bin/streamlit run app.py
+```
+
+The dashboard uses the same audit engine as the CLI. The core validation logic remains in the `dq_audit` package.
 
 ## Installation for local development
 
