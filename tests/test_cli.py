@@ -31,3 +31,8 @@ def test_cli_run_writes_reports(tmp_path: Path) -> None:
     assert (out_dir / "summary.md").exists()
     assert (out_dir / "metrics.json").exists()
     assert (out_dir / "summary.html").exists()
+    assert (out_dir / "flagged_rows.csv").exists()
+
+    flagged_rows = (out_dir / "flagged_rows.csv").read_text(encoding="utf-8")
+    assert "bob.example.com" in flagged_rows
+    assert "not-a-date" in flagged_rows

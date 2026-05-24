@@ -73,7 +73,8 @@ The generated reports will be written to:
 reports/sample/
 ├── summary.md
 ├── metrics.json
-└── summary.html
+├── summary.html
+└── flagged_rows.csv
 ```
 
 ## What it does
@@ -121,6 +122,7 @@ issues=8
 summary_md=reports/sample/summary.md
 metrics_json=reports/sample/metrics.json
 summary_html=reports/sample/summary.html
+flagged_rows_csv=reports/sample/flagged_rows.csv
 ```
 
 Generated files:
@@ -128,6 +130,7 @@ Generated files:
 - `summary.md`
 - `metrics.json`
 - `summary.html`
+- `flagged_rows.csv`
 
 ## Example rules file
 
@@ -199,7 +202,7 @@ It provides a browser-based workflow:
 - review executive metrics
 - view issue charts
 - inspect business impact by rule
-- download HTML, Markdown, and JSON reports
+- download HTML, Markdown, JSON, and flagged rows CSV reports
 
 Run the dashboard locally:
 

@@ -64,6 +64,7 @@ def run_command(args: argparse.Namespace) -> int:
     print(f"summary_md={output_dir / 'summary.md'}")
     print(f"metrics_json={output_dir / 'metrics.json'}")
     print(f"summary_html={output_dir / 'summary.html'}")
+    print(f"flagged_rows_csv={output_dir / 'flagged_rows.csv'}")
 
     return 0
 

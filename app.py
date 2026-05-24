@@ -12,7 +12,7 @@ import streamlit as st
 
 from dq_audit.audit import AuditResult, audit_dataframe
 from dq_audit.io import read_dataset
-from dq_audit.report import _build_html_summary, _build_markdown_summary
+from dq_audit.report import _build_flagged_rows_csv, _build_html_summary, _build_markdown_summary
 from dq_audit.rules import load_rules
 
 
@@ -173,12 +173,23 @@ def _render_result(result: AuditResult) -> None:
         hide_index=True,
     )
 
+    st.markdown("### Exact flagged rows")
+    if result.flagged_rows:
+        st.dataframe(
+            _flagged_row_rows(result),
+            use_container_width=True,
+            hide_index=True,
+        )
+    else:
+        st.success("No flagged rows found.")
+
     st.markdown("### Downloads")
     html_report = _build_html_summary(result)
     markdown_report = _build_markdown_summary(result)
     metrics_json = json.dumps(metrics, indent=2, ensure_ascii=False) + "\n"
+    flagged_rows_csv = _build_flagged_rows_csv(result)
 
-    dl_1, dl_2, dl_3 = st.columns(3)
+    dl_1, dl_2, dl_3, dl_4 = st.columns(4)
     dl_1.download_button(
         "Download HTML report",
         data=html_report,
@@ -200,6 +211,13 @@ def _render_result(result: AuditResult) -> None:
         mime="application/json",
         use_container_width=True,
     )
+    dl_4.download_button(
+        "Download flagged rows CSV",
+        data=flagged_rows_csv,
+        file_name="flagged_rows.csv",
+        mime="text/csv",
+        use_container_width=True,
+    )
 
 
 def _issue_rows(result: AuditResult) -> list[dict[str, Any]]:
@@ -216,6 +234,20 @@ def _issue_rows(result: AuditResult) -> list[dict[str, Any]]:
             "Technical message": issue.message,
         }
         for issue in result.issues
+    ]
+
+
+def _flagged_row_rows(result: AuditResult) -> list[dict[str, Any]]:
+    return [
+        {
+            "Row number": row.row_number,
+            "Severity": SEVERITY_BY_RULE.get(row.rule_type, "Review"),
+            "Rule": row.rule_type,
+            "Column": row.column,
+            "Current value": "" if row.current_value is None else row.current_value,
+            "Message": row.message,
+        }
+        for row in result.flagged_rows
     ]
 
 

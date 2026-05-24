@@ -47,6 +47,19 @@ def test_audit_dataframe_detects_expected_issues() -> None:
     assert issues[("allowed_values", "country")] == 1
     assert issues[("numeric_range", "age")] == 1
 
+    flagged = {
+        (row.row_number, row.rule_type, row.column, row.current_value)
+        for row in result.flagged_rows
+    }
+
+    assert len(result.flagged_rows) == 6
+    assert (1, "unique", "customer_id", 1) in flagged
+    assert (2, "unique", "customer_id", 1) in flagged
+    assert (3, "not_null", "email", None) in flagged
+    assert (2, "pattern", "email", "bad-email") in flagged
+    assert (2, "allowed_values", "country", "XX") in flagged
+    assert (2, "numeric_range", "age", -1) in flagged
+
 
 def test_audit_dataframe_passes_clean_data() -> None:
     df = pl.DataFrame(
@@ -74,3 +87,4 @@ def test_audit_dataframe_passes_clean_data() -> None:
 
     assert result.passed is True
     assert result.issues == []
+    assert result.flagged_rows == []
