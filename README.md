@@ -27,10 +27,6 @@ Business value:
 - gives technical users repeatable CLI output and JSON metrics
 - creates a clear handoff between data review and data cleaning
 
-## Dashboard preview
-
-![Data Quality Audit Dashboard](docs/dashboard-screenshot.png)
-
 ## System requirements
 
 Recommended environment:
