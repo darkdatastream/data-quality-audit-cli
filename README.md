@@ -4,6 +4,29 @@ CLI tool for auditing messy CSV and Parquet datasets with Polars, YAML validatio
 
 The project shows a reusable Python package structure instead of a one-off notebook. It is designed as a small portfolio project for data quality checks, validation rules, CLI workflows, automated tests, and GitHub Actions.
 
+## Portfolio case study
+
+Many business datasets look usable at first glance but contain hidden issues that can break imports, damage reports, or create operational mistakes. Common examples include duplicate customer IDs, missing emails, invalid dates, unexpected country codes, negative values, and inconsistent categories.
+
+This project is a small data quality audit system built to catch those problems before a CSV or Parquet file is used in a CRM, reporting pipeline, email campaign, or internal business tool.
+
+The project includes two usage paths:
+
+- a CLI workflow for technical users and automation
+- a Streamlit dashboard for business-facing review
+
+The dashboard lets a user upload a CSV file, run an audit, review executive metrics, inspect charts, see exact flagged rows, and download reports. The CLI uses the same validation engine and can generate reproducible output files for automated workflows.
+
+The goal is not only to detect that a dataset has problems, but also to show which rows are affected and why they should be reviewed before the data is imported or trusted.
+
+Business value:
+
+- reduces failed imports caused by messy source files
+- helps spot risky records before they enter business systems
+- gives non-technical users a readable audit dashboard
+- gives technical users repeatable CLI output and JSON metrics
+- creates a clear handoff between data review and data cleaning
+
 ## System requirements
 
 Recommended environment:
